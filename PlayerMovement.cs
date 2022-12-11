@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private float jumpingPower = 24f;
     private bool facingRight = true;
 
+    public static bool playerControlsEnabled = true;
+
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -16,18 +18,21 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Get's a value of -1, 0, or 1 depending on the direction we're moving
-        horizontal = Input.GetAxisRaw("Horizontal");
-
-        //while someone is pressing space or up arrow
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
-            && IsGrounded())
+        if (playerControlsEnabled)
         {
-            rb.AddForce(Vector2.up * jumpingPower, ForceMode2D.Impulse);
-        }
+            //Get's a value of -1, 0, or 1 depending on the direction we're moving
+            horizontal = Input.GetAxisRaw("Horizontal");
 
-        //flip are character if the user changed directions
-        Flip();
+            //while someone is pressing space or up arrow
+            if (Input.GetKeyDown(KeyCode.UpArrow) && IsGrounded())
+            {
+                rb.AddForce(Vector2.up * jumpingPower, ForceMode2D.Impulse);
+            }
+
+            //flip are character if the user changed directions
+            Flip();
+        }
+        
     }
 
     //FixedUpdate can run once, zero, or several times per frame,
