@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-
+//This script controls messages presented by NPC.
+//The message changes once the player collects the item.
 //This script relies on variables in the ItemCollector and PlayerMovment scripts
 public class Dialogue : MonoBehaviour
 {
